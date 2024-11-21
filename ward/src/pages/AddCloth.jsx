@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // for navigation
 
@@ -22,32 +23,69 @@ function AddCloth() {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
 
-    if (!itemName || !image || !category) {
+  //   if (!itemName || !image || !category) {
+  //     setErrorMessage("Please fill in all fields!");
+  //     return;
+  //   }
+
+  //   setErrorMessage("");
+
+  //   // Save the data (for now, log to console)
+  //   const clothingData = {
+  //     itemName,
+  //     image,
+  //     category,
+  //   };
+  //   console.log("Saved Clothing Item:", clothingData);
+
+  //   // Clear the form
+  //   setItemName("");
+  //   setImage(null);
+  //   setCategory("");
+  //   setImagePreview("");
+  //   alert("Clothing item added successfully!");
+  // };
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    if (!itemName || !category) {
       setErrorMessage("Please fill in all fields!");
       return;
     }
-
+  
     setErrorMessage("");
-
-    // Save the data (for now, log to console)
+  
     const clothingData = {
       itemName,
-      image,
       category,
     };
-    console.log("Saved Clothing Item:", clothingData);
-
-    // Clear the form
-    setItemName("");
-    setImage(null);
-    setCategory("");
-    setImagePreview("");
-    alert("Clothing item added successfully!");
+  
+    try {
+      const response = await axios.post("http://localhost:5000/api/clothes/add", clothingData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      if (response.status === 200) {
+        alert("Clothing item added successfully!");
+        setItemName("");
+        setCategory("");
+        setImagePreview("");
+        navigate("/cloth-category"); // Navigate to the home page
+      }
+    } catch (err) {
+      console.error("Error adding clothing item on server:", err);
+      setErrorMessage(err.response?.data?.error || "Failed to add on server.");
+    }
   };
-
+  
+  
+  
   return (
     
         <div className="flex flex-col  items-center p-6">

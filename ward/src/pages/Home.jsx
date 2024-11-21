@@ -8,7 +8,11 @@ const Home = () => {
   const navigate = useNavigate();
 
   const login = useGoogleLogin({
-    onSuccess: (response) => setUser(response),
+    onSuccess: (response) => {
+      setUser(response);
+      console.log("Login Success:", response);
+    }, 
+    
     onError: (error) => console.log("Login Failed:", error),
   });
 
