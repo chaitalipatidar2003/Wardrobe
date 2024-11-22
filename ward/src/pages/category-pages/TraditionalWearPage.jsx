@@ -11,7 +11,7 @@ function TraditionalWearPage() {
         </b>
       </p>
 
-      <CardGrid/>
+      <CardGrid category="Traditional Wear"/>
       <div>
    
       </div>

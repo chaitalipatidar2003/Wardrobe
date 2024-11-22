@@ -1,3 +1,4 @@
+// Clothing model - clothingSchema.js
 const mongoose = require('mongoose');
 
 const clothingSchema = new mongoose.Schema({
@@ -6,6 +7,4 @@ const clothingSchema = new mongoose.Schema({
   
 });
 
-const Clothing = mongoose.model('Clothing', clothingSchema);
-
-module.exports = Clothing;
+module.exports = mongoose.model('Clothing', clothingSchema);

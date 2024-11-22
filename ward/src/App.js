@@ -14,6 +14,8 @@ import SwiftCloth from "./SwiftCloth";
 import AddCloth from "./pages/AddCloth";
 
 const App = () => {
+
+  
   return (
     <>
       <Header />

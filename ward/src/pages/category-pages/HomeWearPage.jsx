@@ -11,7 +11,7 @@ function HomeWearPage() {
         </b>
       </p>
 
-      <CardGrid/>
+      <CardGrid category="Home Wear"/>
       <div>
    
       </div>
