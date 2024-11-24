@@ -24,7 +24,44 @@ function AddCloth() {
     }
   };
 
- const handleSubmit = async (e) => {
+//  const handleSubmit = async (e) => {
+//   e.preventDefault();
+
+//   if (!itemName || !category) {
+//     setErrorMessage("Please fill in all fields!");
+//     return;
+//   }
+
+//   const clothingData = { itemName, category };
+
+//   try {
+//     const response = await axios.post(
+//       "http://localhost:5000/api/clothes/add",
+//       clothingData,
+//       {
+//         headers: {
+//           Authorization: `Bearer ${localStorage.getItem("token")}`, // Include token
+//           "Content-Type": "application/json",
+//         },
+//       }
+//     );
+
+//     if (response.status === 200) {
+//       alert("Clothing item added successfully!");
+//       setItemName("");
+//       setCategory("");
+//       navigate("/cloth-category");
+//     }
+//   } catch (err) {
+//     console.error("Error adding clothing item:", err);
+//     setErrorMessage(err.response?.data?.error || "Failed to add on server.");
+//   }
+// };
+
+const user = JSON.parse(localStorage.getItem("user"));
+
+
+const handleSubmit = async (e) => {
   e.preventDefault();
 
   if (!itemName || !category) {
@@ -32,15 +69,14 @@ function AddCloth() {
     return;
   }
 
-  const clothingData = { itemName, category };
+  const clothingData = { itemName, category, email: user.email }; // Sending email directly
 
   try {
     const response = await axios.post(
-      "http://localhost:5000/api/clothes/add",
+      "http://localhost:5000/api/clothes/add", // Updated endpoint
       clothingData,
       {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`, // Include token
           "Content-Type": "application/json",
         },
       }
@@ -50,14 +86,13 @@ function AddCloth() {
       alert("Clothing item added successfully!");
       setItemName("");
       setCategory("");
-      navigate("/cloth-category");
+      navigate("/cloth-category"); // Navigate to category page after adding
     }
   } catch (err) {
     console.error("Error adding clothing item:", err);
     setErrorMessage(err.response?.data?.error || "Failed to add on server.");
   }
 };
-
 
   
   return (

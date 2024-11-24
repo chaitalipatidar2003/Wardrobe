@@ -12,6 +12,7 @@ import WardrobeSidebar from "./pages/WardrobeSidebar";
 import RemoveCloth from "./RemoveCloth";
 import SwiftCloth from "./SwiftCloth";
 import AddCloth from "./pages/AddCloth";
+import ClothDetails from "./pages/ClothDetails";
 
 const App = () => {
 
@@ -44,6 +45,7 @@ const App = () => {
           <Route path="party-wear" element={<PartyWearPage />} />
           <Route path="traditional-wear" element={<TraditionalWearPage />} />
         </Route>
+        <Route path="/clothes/:id" element={<ClothDetails/>} />
       </Routes>
     </>
   );
